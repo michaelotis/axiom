@@ -454,7 +454,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nNonce = 0;
 
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
-	if(nHeight >= Params().Zerocoin_StartHeight()){
         uint256 nCheckpoint;
 	int nAccumBlock = nHeight - (nHeight % 10) - 10;
 	if (nAccumBlock < 0) {
@@ -478,7 +477,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 }
             }
         }
-	}
+	
 
         pblock->nAccumulatorCheckpoint = pCheckpointCache.second.second;
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
