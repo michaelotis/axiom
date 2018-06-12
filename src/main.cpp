@@ -2536,7 +2536,7 @@ bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError
                 return false;
 
             // find checkpoints by iterating through the blockchain beginning with the first zerocoin block
-            if (pindex->nAccumulatorCheckpoint != pindex->pprev->nAccumulatorCheckpoint) {
+            if (pindex->nAccumulatorCheckpoint != pindex->pprev->nAccumulatorCheckpoint && pindex >= Params().Zerocoin_StartHeight()) {
                 if (find(listMissingCheckpoints.begin(), listMissingCheckpoints.end(), pindex->nAccumulatorCheckpoint) != listMissingCheckpoints.end()) {
                     uint256 nCheckpointCalculated = 0;
                     AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
